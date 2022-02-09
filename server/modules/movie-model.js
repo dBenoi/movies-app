@@ -1,6 +1,9 @@
+//import mongoose from dependency
 const mongoose = require('mongoose')
+//assign mongoose.Schema to Schema
 const Schema = mongoose.Schema
 
+//create movie schema and require all 
 const Movie = new Schema(
   {
     name: {
@@ -19,4 +22,5 @@ const Movie = new Schema(
   { timestamps: true }
 )
 
+//export schema for use in other files
 module.exports = mongoose.model('movies', Movie)
