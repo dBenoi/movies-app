@@ -1,34 +1,40 @@
 //create CRUD operations and controllers
 
 //import Movie class from modules
-const Movie = require('../modules/movie-model')
+const Movie = require('../models/movie-model')
 
 //create a new movie
-createMovie = (req, res) => {
-  const body = req.body;
+createMovie = async (req, res) => {
+  const body = req.body
 
   if (!body) {
     return res
       .status(400)
       .json({ success: false, error: 'You must provide a movie.', })
   }
-
-  const movie = new Movie(body);
-
+  console.log('We have a body')
+  const movie = new Movie({
+    name: req.body.name,
+    time: req.body.time,
+    rating: req.body.rating,
+  })
+  console.log(req.body)
   if (!movie) {
     return res
       .status(400)
-      .json({ success: false, error: err })
+      .json({ success: false, error: 'Something went wrong' })
   }
+  console.log('We have a movie')
 
-  movie
+
+
+  await movie
     .save()
     .then(() => {
       return res
         .status(201)
         .json({
           success: true,
-          id: movie.id,
           message: 'Movie created!',
         })
     })
@@ -36,7 +42,7 @@ createMovie = (req, res) => {
       return res
         .status(400)
         .json({
-          error, message: 'Movie not created.',
+          error, message: 'Movie not created. 6969',
         })
     })
 }
