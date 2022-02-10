@@ -12,21 +12,19 @@ createMovie = (req, res) => {
       .status(400)
       .json({ success: false, error: 'You must provide a movie.', })
   }
-  console.log('We have a body')
+
   const movie = new Movie({
     name: req.body.name,
     time: req.body.time,
     rating: req.body.rating,
   })
-  console.log(req.body)
+
+
   if (!movie) {
     return res
       .status(400)
       .json({ success: false, error: 'Something went wrong' })
   }
-  console.log('We have a movie')
-
-
 
   movie
     .save()
@@ -42,7 +40,7 @@ createMovie = (req, res) => {
       return res
         .status(400)
         .json({
-          error, message: 'Movie not created. 6969',
+          error, message: 'Movie not created.',
         })
     })
 }

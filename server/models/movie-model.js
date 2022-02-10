@@ -6,11 +6,12 @@ const Schema = mongoose.Schema
 //create movie schema and require all 
 const movieSchema = new Schema(
   {
-    name: String,
-    time: [String],
-    rating: Number,
+    name: { type: String, required: true },
+    time: { type: [String], required: true },
+    rating: { type: Number, required: true },
 
-  }
+  },
+  { timestamps: true },
 )
 
 //export schema for use in other files

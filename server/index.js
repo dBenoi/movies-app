@@ -9,7 +9,7 @@ const movieRouter = require('./routes/movie-router')
 const app = express();
 const apiPort = 3000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
 app.use(cors());
 const jsonParser = bodyParser.json();
 
@@ -17,27 +17,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
-})
-
-app.post('/new-movie', jsonParser, function (req, res) {
-  const movie = new Movie({
-    name: req.body.name,
-    time: req.body.time,
-    rating: req.body.rating,
-  })
-
-  console.log(req.body.body)
-
-  movie.save((err, resp) => {
-    if (err) {
-      console.log(err);
-      res.status(400).json({ success: false, message: 'Something went wrong' });
-    } else {
-      res.send({
-        message: 'The movie has been added!'
-      })
-    }
-  })
 })
 
 app.use('/api', movieRouter)
