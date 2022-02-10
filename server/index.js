@@ -11,7 +11,7 @@ const apiPort = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(bodyParser.json())
+const jsonParser = bodyParser.json();
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
@@ -19,11 +19,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/new-movie', function (req, res) {
-  const movie = new Movie;
-  movie.name = req.body.name;
-  movie.time = req.body.time;
-  movie.rating = req.body.rating;
+app.post('/new-movie', jsonParser, function (req, res) {
+  const movie = new Movie({
+    name: req.body.name,
+    time: req.body.time,
+    rating: req.body.rating,
+  })
 
   console.log(req.body.body)
 

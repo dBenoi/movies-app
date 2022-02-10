@@ -4,7 +4,7 @@
 const Movie = require('../models/movie-model')
 
 //create a new movie
-createMovie = async (req, res) => {
+createMovie = (req, res) => {
   const body = req.body
 
   if (!body) {
@@ -28,7 +28,7 @@ createMovie = async (req, res) => {
 
 
 
-  await movie
+  movie
     .save()
     .then(() => {
       return res
