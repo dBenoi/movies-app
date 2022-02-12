@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Navbar } from '../components';
+import { MoviesInsert, MoviesList, MoviesUpdate } from '../pages/index';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -8,11 +9,11 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Switch>
-        <Route path='/movies/list' exact component={MoviesList} />
-        <Route path='/movies/create' exact component={MoviesInsert} />
-        <Route path='/movies/update/:id' exact component={MoviesUpdate} />
-      </Switch>
+      <Routes>
+        <Route path='/movies/list' element={<MoviesList />} />
+        <Route path='/movies/create' element={<MoviesInsert />} />
+        <Route path='/movies/update/:id' element={<MoviesUpdate />} />
+      </Routes>
     </Router>
   );
 }
